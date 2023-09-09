@@ -147,7 +147,7 @@ class _HomePageState extends State<HomePage> {
           body:  Column(
             mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
 
                 // the home page sections components
                 // the most view move section
