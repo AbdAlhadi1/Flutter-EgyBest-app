@@ -1,38 +1,14 @@
 // ignore: file_names
-import 'package:egybest_app/HomePage/Widget/Movie_Item.dart';
 import 'package:flutter/material.dart';
 
-class MostViewSection extends StatelessWidget {
-  const MostViewSection({super.key});
+// ignore: must_be_immutable
+class HomePageSections extends StatelessWidget {
+  String title;
+  List moviesList;
+  HomePageSections({super.key,required this.title,required this.moviesList});
 
   @override
   Widget build(BuildContext context) {
-    List movie = [
-      const Padding(
-        padding: EdgeInsets.only(left: 5,right: 5),
-        child: Center(child: MovieItem()),
-      ),
-      const Padding(
-        padding: EdgeInsets.only(left: 5,right: 5),
-        child: Center(child: MovieItem()),
-      ),
-      const Padding(
-        padding: EdgeInsets.only(left: 5,right: 5),
-        child: Center(child: MovieItem()),
-      ),
-      const Padding(
-        padding: EdgeInsets.only(left: 5,right: 5),
-        child: Center(child: MovieItem()),
-      ),
-      const Padding(
-        padding: EdgeInsets.only(left: 5,right: 5),
-        child: Center(child: MovieItem()),
-      ),
-      const Padding(
-        padding: EdgeInsets.only(left: 5,right: 5),
-        child: Center(child: MovieItem()),
-      ),
-    ];
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 330,
@@ -46,7 +22,7 @@ class MostViewSection extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 15),
-                  child: RichText(text: const TextSpan(text: "الافلام الاكثر مشاهدة",style: TextStyle(
+                  child: RichText(text: TextSpan(text: title,style: const TextStyle(
                     color: Colors.black,
                     fontSize: 19,
                     fontWeight: FontWeight.w600
@@ -70,20 +46,12 @@ class MostViewSection extends StatelessWidget {
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 children: [
-                    for(int i=0;i<movie.length;i++)movie[i],
+                    for(int i=0;i<moviesList.length;i++)moviesList[i],
                   ],
                 ),
             ),
           ],
         )
-          /*ListView.builder(
-            scrollDirection: Axis.horizontal,
-            shrinkWrap: true,
-            itemCount: 5,
-            itemBuilder: (context,i)=>const Padding(
-              padding: EdgeInsets.only(left: 5,right: 5),
-              child: Center(child: MovieItem()),
-            ))*/
       ),
     );
   }

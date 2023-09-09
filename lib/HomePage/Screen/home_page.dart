@@ -12,6 +12,32 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List movie = [
+    const Padding(
+      padding: EdgeInsets.only(left: 5,right: 5),
+      child: Center(child: MovieItem()),
+    ),
+    const Padding(
+      padding: EdgeInsets.only(left: 5,right: 5),
+      child: Center(child: MovieItem()),
+    ),
+    const Padding(
+      padding: EdgeInsets.only(left: 5,right: 5),
+      child: Center(child: MovieItem()),
+    ),
+    const Padding(
+      padding: EdgeInsets.only(left: 5,right: 5),
+      child: Center(child: MovieItem()),
+    ),
+    const Padding(
+      padding: EdgeInsets.only(left: 5,right: 5),
+      child: Center(child: MovieItem()),
+    ),
+    const Padding(
+      padding: EdgeInsets.only(left: 5,right: 5),
+      child: Center(child: MovieItem()),
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -118,11 +144,14 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
 
-          body: Column(
+          body:  Column(
             mainAxisSize: MainAxisSize.min,
-              children: const[
+              children: [
                 SizedBox(height: 10,),
-                MostViewSection()
+
+                // the home page sections components
+                // the most view move section
+                HomePageSections(title: "الافلام الاكثر مشاهدة",moviesList: movie,)
               ],
             ),
         ),
