@@ -1,4 +1,5 @@
 import 'package:egybest_app/HomePage/Widget/Drawer_component.dart';
+import 'package:egybest_app/HomePage/Widget/Movie_Item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -16,10 +17,12 @@ class _HomePageState extends State<HomePage> {
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: Scaffold(
+          backgroundColor: Colors.grey[350],
           appBar: AppBar(
             iconTheme: const IconThemeData(
               color: Colors.indigo
             ),
+
             backgroundColor: Colors.white,
             title: Row(
               children: [
@@ -35,6 +38,7 @@ class _HomePageState extends State<HomePage> {
                 )))
               ],
             ),
+
             actions: [
               IconButton(
                 onPressed: (){
@@ -112,7 +116,31 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          body: Container(),
+
+          body:SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 10,),
+                Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 330,
+                      color: Colors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 7),
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            itemCount: 5,
+                            itemBuilder: (context,i)=>const Padding(
+                              padding: EdgeInsets.only(left: 5,right: 5),
+                              child: Center(child: MovieItem()),
+                            )),
+                      ),
+                    ),
+              ],
+            ),
+          )
         ),
       ),
     );
