@@ -11,6 +11,12 @@ class LogIn extends StatefulWidget {
 class _LogInState extends State<LogIn> {
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  bool formCheck (){
+    var op = formKey.currentState;
+    return op!.validate();
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -35,14 +41,6 @@ class _LogInState extends State<LogIn> {
                     children: [
                       Stack(
                         children:[
-                         /* const Center(
-                            child:  SizedBox(
-                              width: 200,
-                              height: 200,
-                              child: Image(image: AssetImage("images/logo1.png")),
-                            ),
-                          ),*/
-                          //SizedBox(height: MediaQuery.of(context).size.height/20,),
                           Padding(
                             padding: const EdgeInsets.only(top: 160),
                             child: Row(
@@ -66,27 +64,51 @@ class _LogInState extends State<LogIn> {
                           ),]
                       ),
                       SizedBox(height: MediaQuery.of(context).size.height/14,),
-                      MyFild(
-                        contorller: userNameController,
-                        hintText: "اسم المستخدم",
-                        errorText: "",
-                        obscure: false,
-                        readOnly: false,
-                        rightPadding: 20.0,
-                        leftPadding: 20.0,
-                        color: Colors.white,
-                        sidesColor: Colors.black45),
-                      const SizedBox(height: 10,),
-                      MyFild(
-                          contorller: userNameController,
-                          hintText: "كلمة المرور",
-                          obscure: false,
-                          errorText: "",
-                          readOnly: false,
-                          rightPadding: 20.0,
-                          leftPadding: 20.0,
-                          color: Colors.white,
-                          sidesColor: Colors.black45),
+                      Form(
+                        key: formKey,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            MyFild(
+                              contorller: userNameController,
+                              hintText: "اسم المستخدم",
+                              errorText: "",
+                              obscure: false,
+                              readOnly: false,
+                              rightPadding: 20.0,
+                              leftPadding: 20.0,
+                              color: Colors.white,
+                              sidesColor: Colors.black45,
+                              val: (_){
+                                if(userNameController.text.isEmpty){
+                                  return "required";
+                                } else {
+                                  return null;
+                                }
+                              },
+                            ),
+                            const SizedBox(height: 10,),
+                            MyFild(
+                                contorller: userNameController,
+                                hintText: "كلمة المرور",
+                                obscure: false,
+                                errorText: "",
+                                readOnly: false,
+                                rightPadding: 20.0,
+                                leftPadding: 20.0,
+                                color: Colors.white,
+                                sidesColor: Colors.black45,
+                                val: (_){
+                                  if(passwordController.text.isEmpty){
+                                    return "required";
+                                  } else {
+                                    return null;
+                                  }
+                                }
+                            ),
+                          ],
+                        ),
+                      ),
 
                       const SizedBox(height: 15,),
                       ElevatedButton(
@@ -97,9 +119,11 @@ class _LogInState extends State<LogIn> {
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18))
                         ),
                         onPressed: (){
+                          if(formCheck()){
 
+                          }
                         },
-                        child: Text("تسجيل دخول"),
+                        child: const Text("تسجيل دخول"),
                       ),
                       //const SizedBox(height: 20,),
                       const SizedBox(
