@@ -1,3 +1,4 @@
+import 'package:egybest_app/Movie%20Details/Screen/movie_details.dart';
 import 'package:flutter/material.dart';
 
 class MovieItem extends StatelessWidget {
@@ -7,7 +8,7 @@ class MovieItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
         onTap: (){
-
+          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const MovieDetails()));
         },
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -43,7 +44,7 @@ class MovieItem extends StatelessWidget {
                                 Transform.rotate(
                                   angle: -70,
                                   child:Transform.translate(
-                                    offset: Offset(4,4),
+                                    offset: const Offset(4,4),
                                     child: Container(
                                         color: Colors.red,
                                         height: 20,

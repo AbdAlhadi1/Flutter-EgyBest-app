@@ -1,8 +1,10 @@
 import 'package:egybest_app/HomePage/Widget/Drawer_component.dart';
 import 'package:egybest_app/HomePage/Widget/Most_view_section.dart';
 import 'package:egybest_app/HomePage/Widget/Movie_Item.dart';
+import 'package:egybest_app/Log%20Out/log_out_api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tuple/tuple.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -140,6 +142,20 @@ class _HomePageState extends State<HomePage> {
                 ),
 
                 Divider(color: Colors.black.withOpacity(0.5),),
+
+                Padding(
+                  padding: const EdgeInsets.only(top: 10,right: 7),
+                  child:InkWell(
+                    onTap: () {
+                      //Navigator.of(context).push(route)
+                    },
+                    child: Row(
+                      children: [
+                        Text("تسجيل خروج"),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

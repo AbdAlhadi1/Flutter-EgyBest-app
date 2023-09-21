@@ -1,3 +1,5 @@
+import 'package:egybest_app/Log%20In/Widget/send_log_in_data.dart';
+import 'package:egybest_app/SIgn%20Up/Screen/sign_up.dart';
 import 'package:egybest_app/my_field.dart';
 import 'package:flutter/material.dart';
 
@@ -42,7 +44,7 @@ class _LogInState extends State<LogIn> {
                       Stack(
                         children:[
                           Padding(
-                            padding: const EdgeInsets.only(top: 160),
+                            padding: const EdgeInsets.only(top: 130),
                             child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -89,7 +91,7 @@ class _LogInState extends State<LogIn> {
                             ),
                             const SizedBox(height: 10,),
                             MyFild(
-                                contorller: userNameController,
+                                contorller: passwordController,
                                 hintText: "كلمة المرور",
                                 obscure: false,
                                 errorText: "",
@@ -120,7 +122,7 @@ class _LogInState extends State<LogIn> {
                         ),
                         onPressed: (){
                           if(formCheck()){
-
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> SendLogInData(passwordController: passwordController, userNameController: userNameController)));
                           }
                         },
                         child: const Text("تسجيل دخول"),
@@ -141,7 +143,7 @@ class _LogInState extends State<LogIn> {
                             ),),
                             InkWell(
                               onTap: (){
-
+                                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const SignUp()));
                               },
                               child:const Text("إنشاء حساب",style: TextStyle(
                                 fontSize: 18,

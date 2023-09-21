@@ -19,14 +19,24 @@ class SendSignUpData extends StatelessWidget {
               return const Center(child: CircularProgressIndicator(),);
             } else if(snapshot.connectionState == ConnectionState.done){
               if(snapshot.data!.item1 == true){
-                return const LogIn();
+                return  AlertDialog(
+                  title: const Text("تم تسجيل الحستب بنجاح الرجاء تفقد الايميل من اجل تثبيت الحساب"),
+                  actions: [
+                    ElevatedButton(
+                      onPressed: (){
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>const LogIn()));
+                      },
+                      child: const Text("تأكيد"),
+                    )
+                  ],
+                );
               } else {
                 return AlertDialog(
                   title: const Text(""),
                   actions: [
                     ElevatedButton(
                       onPressed: (){
-
+                        Navigator.of(context).canPop();
                       },
                       child: const Text("رجوع"),
                     )
