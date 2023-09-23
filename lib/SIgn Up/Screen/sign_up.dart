@@ -1,4 +1,5 @@
 import 'package:egybest_app/HomePage/Screen/home_page.dart';
+import 'package:egybest_app/Log%20In/Screen/Log_In.dart';
 import 'package:egybest_app/SIgn%20Up/Widget/send_signup_data.dart';
 import 'package:egybest_app/my_field.dart';
 import 'package:email_validator/email_validator.dart';
@@ -156,7 +157,7 @@ class _SignUpState extends State<SignUp> {
                     ))),
                     InkWell(
                       onTap: (){
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const HomePage()));
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const LogIn()));
                       },
                        child: RichText(text: const TextSpan(text: "تسجيل دخول",style: TextStyle(
                          color: Colors.black,

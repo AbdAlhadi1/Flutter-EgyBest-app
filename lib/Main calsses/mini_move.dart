@@ -1,7 +1,8 @@
 class MiniMove{
 
-  late int movieId,finalRate,quality;
-  late String movieName,cityAndLanguage,movieType,time,trailerUrl,movieTrailerUrl,movieImage,description;
+  late int movieId,quality;
+  late double finalRate;
+  late String movieName,cityAndLanguage,movieType,time,trailerUrl,movieUrl,movieImage,description;
   MiniMove(
       this.movieId,
       this.movieName,
@@ -9,7 +10,7 @@ class MiniMove{
       this.movieType,
       this.time,
       this.movieImage,
-      this.movieTrailerUrl,
+      this.movieUrl,
       this.description,
       this.finalRate,
       this.quality,

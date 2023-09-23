@@ -1,45 +1,23 @@
 import 'package:egybest_app/HomePage/Widget/Drawer_component.dart';
 import 'package:egybest_app/HomePage/Widget/Most_view_section.dart';
-import 'package:egybest_app/HomePage/Widget/Movie_Item.dart';
-import 'package:egybest_app/Log%20Out/log_out_api.dart';
+import 'package:egybest_app/Main%20calsses/category.dart';
+import 'package:egybest_app/Main%20calsses/home_page_sections.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tuple/tuple.dart';
 
+// ignore: must_be_immutable
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  List<Category> category;
+  List<HomePageSection> homePageSection;
+  HomePage({super.key,required this.homePageSection,required this.category});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  List movie = [
-    const Padding(
-      padding: EdgeInsets.only(left: 5,right: 5),
-      child: Center(child: MovieItem()),
-    ),
-    const Padding(
-      padding: EdgeInsets.only(left: 5,right: 5),
-      child: Center(child: MovieItem()),
-    ),
-    const Padding(
-      padding: EdgeInsets.only(left: 5,right: 5),
-      child: Center(child: MovieItem()),
-    ),
-    const Padding(
-      padding: EdgeInsets.only(left: 5,right: 5),
-      child: Center(child: MovieItem()),
-    ),
-    const Padding(
-      padding: EdgeInsets.only(left: 5,right: 5),
-      child: Center(child: MovieItem()),
-    ),
-    const Padding(
-      padding: EdgeInsets.only(left: 5,right: 5),
-      child: Center(child: MovieItem()),
-    ),
-  ];
+  bool isRed = false;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -108,68 +86,59 @@ class _HomePageState extends State<HomePage> {
           drawer: Drawer(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 10,right: 7),
-                  child: DrawerComponent(title: "الاكثر مشاهدة", icon: Icons.remove_red_eye),
+                for(int i=0;i<widget.category.length;i++)Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10,right: 7),
+                      child: DrawerComponent(category: widget.category[i]),
+                    ),
+                    Divider(color: Colors.black.withOpacity(0.5),),
+                  ],
                 ),
-
-                 Divider(color: Colors.black.withOpacity(0.5),),
-
-                Padding(
-                  padding: const EdgeInsets.only(top: 10,right: 7),
-                  child: DrawerComponent(title: "محتويات مستعادة", icon: Icons.file_present_sharp),
-                ),
-
-                Divider(color: Colors.black.withOpacity(0.5),),
-
-                Padding(
-                  padding: const EdgeInsets.only(top: 10,right: 7),
-                  child: DrawerComponent(title: "الافلام", icon: Icons.movie_creation_outlined),
-                ),
-
-                Divider(color: Colors.black.withOpacity(0.5),),
-
-                Padding(
-                  padding: const EdgeInsets.only(top: 10,right: 7),
-                  child: DrawerComponent(title: "المسلسلات", icon: Icons.desktop_mac_rounded),
-                ),
-
-                Divider(color: Colors.black.withOpacity(0.5),),
-
-                Padding(
-                  padding: const EdgeInsets.only(top: 10,right: 7),
-                  child: DrawerComponent(title: "مكتبتي", icon: Icons.my_library_books_sharp),
-                ),
-
-                Divider(color: Colors.black.withOpacity(0.5),),
-
                 Padding(
                   padding: const EdgeInsets.only(top: 10,right: 7),
                   child:InkWell(
-                    onTap: () {
-                      //Navigator.of(context).push(route)
+                    onTap: (){
+                      setState(() {
+                        isRed = !isRed;
+                      });
                     },
                     child: Row(
+                      mainAxisSize: MainAxisSize.max,
                       children: [
-                        Text("تسجيل خروج"),
+                        const Image(image: AssetImage("images/logout.png"),width: 35,height: 35,),
+                        const SizedBox(width: 7,),
+                        RichText(text: TextSpan(text: "تسجيل خروج",style: TextStyle(
+                            color:  (isRed == true)?Colors.red:Colors.indigo,
+                            fontSize: 18
+                        ))),
+
                       ],
                     ),
                   ),
                 ),
+                Divider(color: Colors.black.withOpacity(0.5),),
+
               ],
             ),
           ),
 
-          body:  Column(
-            mainAxisSize: MainAxisSize.min,
-              children: [
-                const SizedBox(height: 10,),
+          body:  SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(height: 10,),
 
-                // the home page sections components
-                // the most view move section
-                HomePageSections(title: "الافلام الاكثر مشاهدة",moviesList: movie,)
-              ],
-            ),
+                  // the home page sections components
+                  // the most view move section
+                  for(int i=0;i<widget.homePageSection.length; i++)Padding(
+                    padding: const EdgeInsets.only(top: 15,bottom: 20),
+                    child: HomePageSections(title: widget.homePageSection[i].category.name, moviesList: widget.homePageSection[i].categoryMovies),
+                  ),
+                ],
+              ),
+          ),
         ),
       ),
     );

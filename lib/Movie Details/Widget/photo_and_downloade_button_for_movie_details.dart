@@ -1,20 +1,23 @@
+import 'package:egybest_app/Main%20calsses/movie.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class PhotoAndDownloadButton extends StatelessWidget {
-  const PhotoAndDownloadButton({super.key});
+  Movie? movie;
+  PhotoAndDownloadButton({super.key,required this.movie});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(top: 40,bottom: 25),
+         Padding(
+          padding: const EdgeInsets.only(top: 40,bottom: 25),
           child: Center(
             child: SizedBox(
               height:420,
               width: 300,
-              child: Image(image: AssetImage("images/GOT.jpg"),fit: BoxFit.fill,),
+              child: Image(image: NetworkImage(movie!.moveInfo.movieImage),fit: BoxFit.fill,),
             ),
           ),
         ),

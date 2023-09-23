@@ -1,7 +1,10 @@
+import 'package:egybest_app/Main%20calsses/movie.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class MovieStory extends StatelessWidget {
-  const MovieStory({super.key});
+  Movie? movie;
+  MovieStory({super.key,required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +27,10 @@ class MovieStory extends StatelessWidget {
           const Divider(),
           Padding(
             padding: const EdgeInsets.only(left: 35,right: 35,top: 15,bottom: 15),
-            child: RichText(text: const TextSpan(text: "انا هلوة كتييييييير كربوجة كامان شعراتي هلوين كتيييييييييير امامير بحب المتاعم كتير كتير باكل بيتزا وبشرب اسير",style: TextStyle(
+            child: RichText(text: TextSpan(text: movie!.moveInfo.description,style: const TextStyle(
               color: Colors.black,
-              fontSize: 17,wordSpacing: 1
-            ))),
+              fontSize: 17,wordSpacing: 1,
+            )),textDirection:TextDirection.ltr),
           ),
         ],
       ),

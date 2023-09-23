@@ -1,4 +1,5 @@
 import 'package:egybest_app/HomePage/Screen/home_page.dart';
+import 'package:egybest_app/HomePage/Widget/get_home_page_section.dart';
 import 'package:egybest_app/Log%20In/Api/log_in_api.dart';
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
@@ -18,7 +19,7 @@ class SendLogInData extends StatelessWidget {
               return const Center(child: CircularProgressIndicator(),);
             } else if(snapshot.connectionState == ConnectionState.done){
               if(snapshot.data!.item1 == true){
-                return const HomePage();
+                return const GetHomePageSection();
               } else {
                 return AlertDialog(
                   title: const Text(""),

@@ -1,7 +1,10 @@
+import 'package:egybest_app/Main%20calsses/movie.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class DetailsTable extends StatelessWidget {
-  const DetailsTable({super.key});
+  Movie? movie;
+  DetailsTable({super.key,required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +19,9 @@ class DetailsTable extends StatelessWidget {
             child: Row(
               children: [
                 RichText(
-                    text: const TextSpan(
-                        text: "GOT",
-                        style: TextStyle(
+                    text: TextSpan(
+                        text: movie!.moveInfo.movieName,
+                        style: const TextStyle(
                             color: Colors.black,
                             fontSize: 18,
                             fontWeight: FontWeight.bold)),
@@ -75,15 +78,22 @@ class DetailsTable extends StatelessWidget {
                     ),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 15),
+                  child: RichText(text: TextSpan(text: movie!.moveInfo.cityAndLanguage,style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600
+                  ))),
+                ),
               ],
             ),
           ),
           const Divider(),
-          const Padding(
-            padding: EdgeInsets.only(right: 20),
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
             child: Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 50,
                   width: 100,
                   child: Center(
@@ -100,7 +110,7 @@ class DetailsTable extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 50,
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 5),
@@ -109,15 +119,22 @@ class DetailsTable extends StatelessWidget {
                     ),
                   ),
                 ),
+               for(int i=0;i<movie!.category.length;i++) Padding(
+                  padding: const EdgeInsets.only(right: 15),
+                  child: RichText(text: TextSpan(text: movie!.category[i].name,style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600
+                  ))),
+                ),
               ],
             ),
           ),
           const Divider(),
-          const Padding(
-            padding: EdgeInsets.only(right: 20),
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
             child: Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 50,
                   width: 100,
                   child: Center(
@@ -134,7 +151,7 @@ class DetailsTable extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 50,
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 5),
@@ -143,15 +160,22 @@ class DetailsTable extends StatelessWidget {
                     ),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 15),
+                  child: RichText(text: TextSpan(text: movie!.moveInfo.movieType,style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600
+                  ))),
+                ),
               ],
             ),
           ),
           const Divider(),
-          const Padding(
-            padding: EdgeInsets.only(right: 20),
+           Padding(
+            padding: const EdgeInsets.only(right: 20),
             child: Row(
               children: [
-                SizedBox(
+               const SizedBox(
                   height: 50,
                   width: 100,
                   child: Center(
@@ -168,7 +192,7 @@ class DetailsTable extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 50,
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 5),
@@ -177,15 +201,22 @@ class DetailsTable extends StatelessWidget {
                     ),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 15),
+                  child: RichText(text: TextSpan(text: movie!.moveInfo.finalRate.toString(),style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600
+                  ))),
+                ),
               ],
             ),
           ),
           const Divider(),
-          const Padding(
-            padding: EdgeInsets.only(right: 20),
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
             child: Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 50,
                   width: 100,
                   child: Center(
@@ -202,7 +233,7 @@ class DetailsTable extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 50,
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 5),
@@ -211,15 +242,22 @@ class DetailsTable extends StatelessWidget {
                     ),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 15),
+                  child: RichText(text: TextSpan(text: movie!.moveInfo.time,style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600
+                  ))),
+                ),
               ],
             ),
           ),
           const Divider(),
-          const Padding(
-            padding: EdgeInsets.only(right: 20),
+          Padding(
+            padding:const EdgeInsets.only(right: 20),
             child: Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 50,
                   width: 100,
                   child: Center(
@@ -236,7 +274,7 @@ class DetailsTable extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 50,
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 5),
@@ -245,15 +283,22 @@ class DetailsTable extends StatelessWidget {
                     ),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 15),
+                  child: RichText(text: TextSpan(text: movie!.quality.highestQuality,style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600
+                  ))),
+                ),
               ],
             ),
           ),
           const Divider(),
-          const Padding(
-            padding: EdgeInsets.only(right: 20),
+           Padding(
+            padding: const EdgeInsets.only(right: 20),
             child: Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 50,
                   width: 100,
                   child: Center(
@@ -270,7 +315,7 @@ class DetailsTable extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+               const SizedBox(
                   height: 50,
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 5),
@@ -278,6 +323,13 @@ class DetailsTable extends StatelessWidget {
                       thickness: 1,
                     ),
                   ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 15),
+                  child: RichText(text: TextSpan(text: movie!.translation.translation,style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600
+                  ))),
                 ),
               ],
             ),

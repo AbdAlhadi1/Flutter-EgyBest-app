@@ -1,10 +1,12 @@
 // ignore: file_names
+import 'package:egybest_app/HomePage/Widget/Movie_Item.dart';
+import 'package:egybest_app/Main%20calsses/mini_move.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class HomePageSections extends StatelessWidget {
   String title;
-  List moviesList;
+  List <MiniMove> moviesList;
   HomePageSections({super.key,required this.title,required this.moviesList});
 
   @override
@@ -16,6 +18,7 @@ class HomePageSections extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(right: 0),
         child: ListView(
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -46,7 +49,10 @@ class HomePageSections extends StatelessWidget {
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 children: [
-                    for(int i=0;i<moviesList.length;i++)moviesList[i],
+                    for(int i=0;i<moviesList.length;i++)Padding(
+                      padding: const EdgeInsets.only(left: 5,right: 5),
+                       child: Center(child: MovieItem(movie: moviesList[i],)),
+                     ),
                   ],
                 ),
             ),

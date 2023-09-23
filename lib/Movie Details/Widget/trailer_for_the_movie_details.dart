@@ -1,22 +1,47 @@
+import 'package:egybest_app/Main%20calsses/movie.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+// ignore: must_be_immutable
 class MovieTrailer extends StatefulWidget {
-  const MovieTrailer({super.key});
+  Movie? movie;
+  MovieTrailer({super.key,required this.movie});
 
   @override
   State<MovieTrailer> createState() => _MovieTrailerState();
 }
 
 class _MovieTrailerState extends State<MovieTrailer> {
+  String trailerId = "";
+  @override
+  void initState() {
+    print(widget.movie!.moveInfo.trailerUrl);
+    int count = 0;
+    for(int i=0;i<widget.movie!.moveInfo.trailerUrl.length;i++){
+      if(widget.movie!.moveInfo.trailerUrl[i] == "/"){
+        count++;
+        if(count == 4){
+          for(int j = i+1 ; j < widget.movie!.moveInfo.trailerUrl.length;j++){
+            if(widget.movie!.moveInfo.trailerUrl[j]!="?") {
+              trailerId+=widget.movie!.moveInfo.trailerUrl[j];
+            } else {
+              break;
+            }
+          }
+        }
+      }
+    }
+    //print(trailerId);
+    super.initState();
+  }
+
   late YoutubePlayerController Ycontroller= YoutubePlayerController(
-    initialVideoId: "lLaUFVSTYKw",
+    initialVideoId: trailerId,
     flags:const YoutubePlayerFlags(
       mute: false,
       autoPlay: false,
     ),
   );
-
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@ import 'package:egybest_app/Main%20calsses/mini_move.dart';
 class CategoryPage{
   late Category category;
   late int count;
-  late String nextPageUrl,previous;
+  late String? nextPageUrl,previous;
   late List<MiniMove> categoryMovies;
   CategoryPage(
       this.category,

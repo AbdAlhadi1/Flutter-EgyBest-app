@@ -19,6 +19,7 @@ class HomePageApi{
       Response response = await get(Uri.parse(Server.host+Server.homePageSection));
       if(response.statusCode == 200){
         print(response.statusCode);
+
         var info = jsonDecode(response.body);
         List infoLength = info;
 
@@ -30,9 +31,23 @@ class HomePageApi{
               info[i]["name"],
               info[i]["icon"]);
 
-              List resultLength = info[i]["results"];
+              var resultLength = info[i]["results"];
+              int size = (resultLength.length?? 0);
               List<MiniMove> categoryMovies = [];
-              for(int j=0;j<resultLength.length;j++){
+              for(int j=0;j<size;j++){
+                  /*print(info[i]["results"][j]["id"].runtimeType);
+                  print(info[i]["results"][j]["name"].runtimeType);
+                  print(info[i]["results"][j]["cityAndLanguage"].runtimeType);
+                  print(info[i]["results"][j]["movie_type"].runtimeType);
+                  print(info[i]["results"][j]["time"].runtimeType);
+                  print("abd");
+                  print(info[i]["results"][j]["movie_image"].runtimeType);
+                  print("alhadi");
+                  print(info[i]["results"][j]["movie_url"].runtimeType);
+                  print(info[i]["results"][j]["description"].runtimeType);
+                  print(info[i]["results"][j]["quality_id"].runtimeType);
+                  print(info[i]["results"][j]["trailer_url"].runtimeType);*/
+                  //print(info[i]["results"][j]["quality_id"].runtimeType);
 
                 MiniMove miniMove = MiniMove(
                     info[i]["results"][j]["id"],
@@ -44,7 +59,7 @@ class HomePageApi{
                     info[i]["results"][j]["movie_url"],
                     info[i]["results"][j]["description"],
                     info[i]["results"][j]["final_rate"],
-                    info[i]["results"][j]["quality_id"],
+                    (info[i]["results"][j]["quality_id"]??0),
                     info[i]["results"][j]["trailer_url"]);
                 categoryMovies.add(miniMove);
               }
@@ -79,6 +94,7 @@ class HomePageApi{
         var info = jsonDecode(response.body);
         List<Category> categoryList = [];
         List responseLength = info;
+        print(responseLength.length);
         for(int i=0;i<responseLength.length;i++){
 
           Category category = Category(
