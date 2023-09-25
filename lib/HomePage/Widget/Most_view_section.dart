@@ -1,13 +1,15 @@
 // ignore: file_names
+import 'package:egybest_app/Category/Widget/get_category_movies.dart';
 import 'package:egybest_app/HomePage/Widget/Movie_Item.dart';
 import 'package:egybest_app/Main%20calsses/mini_move.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class HomePageSections extends StatelessWidget {
+  int categoryId;
   String title;
   List <MiniMove> moviesList;
-  HomePageSections({super.key,required this.title,required this.moviesList});
+  HomePageSections({super.key,required this.title,required this.moviesList,required this.categoryId});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class HomePageSections extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 15),
                   child: InkWell(
                     onTap: (){
-
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>GetCategoryMovies(categoryId: categoryId)));
                     },
                     child: RichText(
                       text: const TextSpan(text: "المزيد", style: TextStyle(

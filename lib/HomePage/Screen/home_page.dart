@@ -190,7 +190,7 @@ class _HomePageState extends State<HomePage> {
                       // the most view move section
                       for(int i=0;i<widget.homePageSection.length; i++)Padding(
                         padding: const EdgeInsets.only(top: 15,bottom: 20),
-                        child: HomePageSections(title: widget.homePageSection[i].category.name, moviesList: widget.homePageSection[i].categoryMovies),
+                        child: HomePageSections(title: widget.homePageSection[i].category.name, moviesList: widget.homePageSection[i].categoryMovies,categoryId: widget.homePageSection[i].category.id),
                       ),
                     ],
                   ),

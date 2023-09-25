@@ -40,7 +40,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                 const SizedBox(height: 20,),
                 Visibility(
                     visible: widget.movie!.relatedMovies.isEmpty? false:true,
-                    child: HomePageSections(title: "افلام ذات صلة", moviesList:widget.movie!.relatedMovies)),
+                    child: HomePageSections(title: "افلام ذات صلة", moviesList:widget.movie!.relatedMovies,categoryId: widget.movie!.category[0].id,)),
                 const SizedBox(height: 50,)
               ],
             ),
