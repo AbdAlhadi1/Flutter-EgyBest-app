@@ -1,9 +1,18 @@
+import 'dart:convert';
+
+import 'package:egybest_app/HomePage/Api/home_page_api.dart';
 import 'package:egybest_app/HomePage/Widget/Drawer_component.dart';
 import 'package:egybest_app/HomePage/Widget/Most_view_section.dart';
+import 'package:egybest_app/HomePage/Widget/get_home_page_section.dart';
 import 'package:egybest_app/Main%20calsses/category.dart';
 import 'package:egybest_app/Main%20calsses/home_page_sections.dart';
+import 'package:egybest_app/Main%20calsses/mini_move.dart';
+import 'package:egybest_app/Server/server.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
+import 'package:tuple/tuple.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatefulWidget {
@@ -16,10 +25,62 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Future<List<HomePageSection>> refreshHomePageMovies() async{
+    try{
+      Response response = await get(Uri.parse(Server.host+Server.homePageSection));
+      if(response.statusCode == 200){
+        print(response.statusCode);
+
+        var info = jsonDecode(response.body);
+        List infoLength = info;
+
+        List<HomePageSection> homePageSections =[];
+
+        for(int i=0;i<infoLength.length;i++){
+          Category category = Category(
+              info[i]["id"],
+              info[i]["name"],
+              info[i]["icon"]);
+
+          var resultLength = info[i]["results"];
+          int size = (resultLength.length?? 0);
+          List<MiniMove> categoryMovies = [];
+          for(int j=0;j<size;j++){
+            MiniMove miniMove = MiniMove(
+                info[i]["results"][j]["id"],
+                info[i]["results"][j]["name"],
+                info[i]["results"][j]["cityAndLanguage"],
+                info[i]["results"][j]["movie_type"],
+                info[i]["results"][j]["time"],
+                info[i]["results"][j]["movies_image"],
+                info[i]["results"][j]["movie_url"],
+                info[i]["results"][j]["description"],
+                info[i]["results"][j]["final_rate"],
+                (info[i]["results"][j]["quality_id"]??0),
+                info[i]["results"][j]["trailer_url"]);
+            categoryMovies.add(miniMove);
+          }
+          HomePageSection homePageSection = HomePageSection(category, categoryMovies);
+          homePageSections.add(homePageSection);
+        }
+        setState(() {
+          widget.homePageSection = homePageSections;
+        });
+        return  homePageSections;
+
+      }
+      else {
+        return[];
+      }
+    }catch(error){
+      return[];
+    }
+  }
   bool isRed = false;
 
   @override
   Widget build(BuildContext context) {
+    HomePageApi ob = HomePageApi();
     return SafeArea(
       child: Directionality(
         textDirection: TextDirection.rtl,
@@ -124,20 +185,19 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
 
-          body:  SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-                children: [
-                  const SizedBox(height: 10,),
-
-                  // the home page sections components
-                  // the most view move section
-                  for(int i=0;i<widget.homePageSection.length; i++)Padding(
-                    padding: const EdgeInsets.only(top: 15,bottom: 20),
-                    child: HomePageSections(title: widget.homePageSection[i].category.name, moviesList: widget.homePageSection[i].categoryMovies),
+          body: LiquidPullToRefresh(
+            onRefresh: refreshHomePageMovies,
+            child: ListView(
+                    children: [
+                      const SizedBox(height: 10,),
+                      // the home page sections components
+                      // the most view move section
+                      for(int i=0;i<widget.homePageSection.length; i++)Padding(
+                        padding: const EdgeInsets.only(top: 15,bottom: 20),
+                        child: HomePageSections(title: widget.homePageSection[i].category.name, moviesList: widget.homePageSection[i].categoryMovies),
+                      ),
+                    ],
                   ),
-                ],
-              ),
           ),
         ),
       ),

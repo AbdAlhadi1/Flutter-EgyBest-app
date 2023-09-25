@@ -1,6 +1,5 @@
 import 'package:egybest_app/Main%20calsses/movie.dart';
 import 'package:flutter/material.dart';
-
 // ignore: must_be_immutable
 class PhotoAndDownloadButton extends StatelessWidget {
   Movie? movie;
@@ -27,7 +26,8 @@ class PhotoAndDownloadButton extends StatelessWidget {
             backgroundColor: Colors.green,
           ),
           onPressed: (){
-
+            //lunchLink(movie);
+            //lunchLink(movie!);
           },
           child: const Row(
             mainAxisSize: MainAxisSize.min,

@@ -9,7 +9,7 @@ import 'package:tuple/tuple.dart';
 
 class CategoryApi{
 
-  Future<Tuple2<bool,CategoryPage?>> getCategoryPage(int categoryId)async{
+  Future<Tuple2<bool,List<CategoryPage>>> getCategoryPage(int categoryId)async{
     try{
       Response response = await get(Uri.parse("${Server.host}${Server.getCategory}$categoryId"));
       if(response.statusCode == 200){
@@ -33,18 +33,21 @@ class CategoryApi{
               info["related_movies"]["results"][i]["trailer_url"]);
               categoryMovies.add(miniMove);
         }
-        CategoryPage categoryPage = CategoryPage(category, categoryMovies, info["related_movies"]["count"], info["related_movies"]["next"], info["related_movies"]["previous"]);
-        return Tuple2(true, categoryPage);
+        CategoryPage categoryPage = CategoryPage(category, categoryMovies, info["related_movies"]["count"], (info["related_movies"]["next"]??""), info["related_movies"]["previous"]??"");
+        List <CategoryPage> categoryPages = [categoryPage];
+        return Tuple2(true, categoryPages);
       } else {
         print (response.statusCode);
         print(jsonDecode(response.body));
-        return const Tuple2(false, null);
+        return const Tuple2(false, []);
       }
     }catch(error){
       print(error);
-      return const Tuple2(false, null);
+      return const Tuple2(false, []);
     }
   }
+
+
 
 
 

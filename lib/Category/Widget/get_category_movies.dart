@@ -14,7 +14,7 @@ class GetCategoryMovies extends StatelessWidget {
     return Scaffold(
       body: FutureBuilder(
           future: ob.getCategoryPage(categoryId),
-          builder: (context,AsyncSnapshot<Tuple2<bool,CategoryPage?>> snapshot ){
+          builder: (context,AsyncSnapshot<Tuple2<bool,List<CategoryPage>>> snapshot ){
             if(snapshot.connectionState == ConnectionState.waiting){
               return const Center(child: CircularProgressIndicator(),);
             } else {
