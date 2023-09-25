@@ -1,10 +1,31 @@
 import 'package:egybest_app/Main%20calsses/movie.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 // ignore: must_be_immutable
-class PhotoAndDownloadButton extends StatelessWidget {
+class PhotoAndDownloadButton extends StatefulWidget {
   Movie? movie;
   PhotoAndDownloadButton({super.key,required this.movie});
 
+  @override
+  State<PhotoAndDownloadButton> createState() => _PhotoAndDownloadButtonState();
+}
+
+class _PhotoAndDownloadButtonState extends State<PhotoAndDownloadButton> {
+  late final WebViewController webViewController;
+  @override
+  void initState() {
+    webViewController = WebViewController()..loadRequest(Uri.parse("https://adel.pythonanywhere.com/movies/${widget.movie!.moveInfo.movieId}/"));
+    super.initState();
+  }
+  lunchLink()async{
+
+    if (await canLaunchUrl(Uri.parse( widget.movie!.moveInfo.movieUrl))) {
+      await launchUrl (Uri.parse( widget.movie!.moveInfo.movieUrl) , mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not launch $Uri.parse( sponserImageController.link.value)';
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -16,7 +37,7 @@ class PhotoAndDownloadButton extends StatelessWidget {
             child: SizedBox(
               height:420,
               width: 300,
-              child: Image(image: NetworkImage(movie!.moveInfo.movieImage),fit: BoxFit.fill,),
+              child: Image(image: NetworkImage(widget.movie!.moveInfo.movieImage),fit: BoxFit.fill,),
             ),
           ),
         ),
@@ -26,7 +47,8 @@ class PhotoAndDownloadButton extends StatelessWidget {
             backgroundColor: Colors.green,
           ),
           onPressed: (){
-            //lunchLink(movie);
+            //Navigator.of(context).push(MaterialPageRoute(builder: (context)=> WebPage(webViewController: webViewController)));
+            lunchLink();
             //lunchLink(movie!);
           },
           child: const Row(
@@ -42,3 +64,25 @@ class PhotoAndDownloadButton extends StatelessWidget {
     );
   }
 }
+
+class WebPage extends StatefulWidget {
+  WebViewController webViewController;
+  WebPage({super.key,required this.webViewController});
+
+  @override
+  State<WebPage> createState() => _WebPageState();
+}
+
+class _WebPageState extends State<WebPage> {
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+        child: Scaffold(
+          body: WebViewWidget(
+            controller: widget.webViewController,
+          ),
+        )
+    );
+  }
+}
+
