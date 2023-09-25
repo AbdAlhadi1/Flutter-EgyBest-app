@@ -7,5 +7,6 @@ class Server{
   static const String listCategory = "APIlistCategory";
   static const String movieDetails = "APIMovie/";
   static const String getCategory = "APICategory/";
+  static const String search = "APImoviesSearch";
 
 }

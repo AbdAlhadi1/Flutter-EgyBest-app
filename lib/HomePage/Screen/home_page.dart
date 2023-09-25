@@ -1,18 +1,15 @@
 import 'dart:convert';
-
-import 'package:egybest_app/HomePage/Api/home_page_api.dart';
 import 'package:egybest_app/HomePage/Widget/Drawer_component.dart';
 import 'package:egybest_app/HomePage/Widget/Most_view_section.dart';
-import 'package:egybest_app/HomePage/Widget/get_home_page_section.dart';
 import 'package:egybest_app/Main%20calsses/category.dart';
 import 'package:egybest_app/Main%20calsses/home_page_sections.dart';
 import 'package:egybest_app/Main%20calsses/mini_move.dart';
+import 'package:egybest_app/Search/Screen/search_page.dart';
 import 'package:egybest_app/Server/server.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
-import 'package:tuple/tuple.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatefulWidget {
@@ -80,7 +77,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    HomePageApi ob = HomePageApi();
     return SafeArea(
       child: Directionality(
         textDirection: TextDirection.rtl,
@@ -110,7 +106,7 @@ class _HomePageState extends State<HomePage> {
             actions: [
               IconButton(
                 onPressed: (){
-
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> SearchPage()));
                 },
                 icon: const Icon(Icons.search,size: 35,),
               ),

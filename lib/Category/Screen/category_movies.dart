@@ -81,6 +81,7 @@ class _CategoryMoviesState extends State<CategoryMovies> {
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: Scaffold(
+          backgroundColor: Colors.grey[350],
           appBar: AppBar(
             centerTitle: true,
             title: Text(widget.categoryPage[0].category.name),
@@ -89,11 +90,17 @@ class _CategoryMoviesState extends State<CategoryMovies> {
           body:ListView(
               controller: scrollController,
               children: [
-                for(int i=0;i<categoryMovies.length;i++)Center(child: SizedBox(
-                  width: MediaQuery.of(context).size.width - 20,
-                  child: Card(
-                      child: MovieItem(movie: categoryMovies[i])),
-                )),
+                for(int i=0;i<categoryMovies.length;i++)Padding(
+                  padding: const EdgeInsets.only(bottom: 10,top :5),
+                  child: Center(child: Container(
+                    color: Colors.white,
+                    width: MediaQuery.of(context).size.width - 20,
+                    child:  Padding(
+                      padding: const EdgeInsets.only(top: 7,bottom: 7),
+                      child: MovieItem(movie: categoryMovies[i]),
+                    ),
+                  )),
+                ),
                 if(isLoadingMore == true)const Padding(padding: EdgeInsets.only(top: 10,bottom: 40),child: Center(child: CircularProgressIndicator(),),)
 
               ],
