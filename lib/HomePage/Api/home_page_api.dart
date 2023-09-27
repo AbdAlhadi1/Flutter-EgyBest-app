@@ -1,9 +1,8 @@
 import 'dart:convert';
-
-import 'package:egybest_app/Main%20calsses/category.dart';
-import 'package:egybest_app/Main%20calsses/home_page_sections.dart';
-import 'package:egybest_app/Main%20calsses/mini_move.dart';
-import 'package:egybest_app/Server/server.dart';
+import 'package:Mova/Main%20calsses/category.dart';
+import 'package:Mova/Main%20calsses/home_page_sections.dart';
+import 'package:Mova/Main%20calsses/mini_move.dart';
+import 'package:Mova/Server/server.dart';
 import 'package:http/http.dart';
 import 'package:tuple/tuple.dart';
 

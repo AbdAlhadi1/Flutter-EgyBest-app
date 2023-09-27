@@ -1,5 +1,5 @@
-import 'package:egybest_app/Log%20In/Screen/Log_In.dart';
-import 'package:egybest_app/SIgn%20Up/Api/sign_up_api.dart';
+import 'package:Mova/Log%20In/Screen/Log_In.dart';
+import 'package:Mova/SIgn%20Up/Api/sign_up_api.dart';
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 

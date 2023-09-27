@@ -1,12 +1,13 @@
 import 'dart:convert';
 
-import 'package:egybest_app/Main%20calsses/category.dart';
-import 'package:egybest_app/Main%20calsses/mini_move.dart';
-import 'package:egybest_app/Main%20calsses/movie.dart';
-import 'package:egybest_app/Main%20calsses/movie_hero.dart';
-import 'package:egybest_app/Main%20calsses/quality.dart';
-import 'package:egybest_app/Main%20calsses/translation.dart';
-import 'package:egybest_app/Server/server.dart';
+
+import 'package:Mova/Main%20calsses/category.dart';
+import 'package:Mova/Main%20calsses/mini_move.dart';
+import 'package:Mova/Main%20calsses/movie.dart';
+import 'package:Mova/Main%20calsses/movie_hero.dart';
+import 'package:Mova/Main%20calsses/quality.dart';
+import 'package:Mova/Main%20calsses/translation.dart';
+import 'package:Mova/Server/server.dart';
 import 'package:http/http.dart';
 import 'package:tuple/tuple.dart';
 

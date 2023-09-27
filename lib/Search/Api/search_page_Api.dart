@@ -1,8 +1,7 @@
 import 'dart:convert';
-
-import 'package:egybest_app/Main%20calsses/mini_move.dart';
-import 'package:egybest_app/Main%20calsses/search_results.dart';
-import 'package:egybest_app/Server/server.dart';
+import 'package:Mova/Main%20calsses/mini_move.dart';
+import 'package:Mova/Main%20calsses/search_results.dart';
+import 'package:Mova/Server/server.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 import 'package:tuple/tuple.dart';

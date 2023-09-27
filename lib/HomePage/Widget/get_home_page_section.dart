@@ -1,10 +1,13 @@
-import 'package:egybest_app/HomePage/Api/home_page_api.dart';
-import 'package:egybest_app/HomePage/Widget/get_cagetory.dart';
-import 'package:egybest_app/Main%20calsses/home_page_sections.dart';
+
+import 'package:Mova/HomePage/Api/home_page_api.dart';
+import 'package:Mova/HomePage/Widget/get_cagetory.dart';
+import 'package:Mova/Main%20calsses/home_page_sections.dart';
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 class GetHomePageSection extends StatelessWidget {
-  const GetHomePageSection({super.key});
+  bool isLoggedIn;
+  var user;
+  GetHomePageSection({super.key,required this.isLoggedIn,this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,7 @@ class GetHomePageSection extends StatelessWidget {
             return const Center(child: CircularProgressIndicator(),);
           } else if(snapshot.connectionState == ConnectionState.done){
             if(snapshot.data!.item1 == true){
-              return GetHomePageCategory(homePageSection: snapshot.data!.item2,);
+              return(isLoggedIn)?GetHomePageCategory(homePageSection: snapshot.data!.item2,isLoggedIn: isLoggedIn,user: user,): GetHomePageCategory(homePageSection: snapshot.data!.item2,isLoggedIn: isLoggedIn,);
             } else {
               return AlertDialog(
                 title: const Text("data"),

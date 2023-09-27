@@ -1,8 +1,7 @@
-import 'package:egybest_app/HomePage/Screen/home_page.dart';
-import 'package:egybest_app/HomePage/Widget/get_home_page_section.dart';
-import 'package:egybest_app/Log%20In/Api/log_in_api.dart';
-import 'package:egybest_app/Log%20In/Screen/Log_In.dart';
-import 'package:egybest_app/Main%20calsses/user.dart';
+
+import 'package:Mova/HomePage/Widget/get_home_page_section.dart';
+import 'package:Mova/Log%20In/Api/log_in_api.dart';
+import 'package:Mova/Main%20calsses/user.dart';
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 
@@ -21,9 +20,9 @@ class CheckIfUserLoggedIn extends StatelessWidget {
               return const Center(child: CircularProgressIndicator(),);
             } else if(snapshot.connectionState == ConnectionState.done){
               if(snapshot.data!.item1 == true){
-                return const GetHomePageSection();
+                return GetHomePageSection(isLoggedIn: true, user: snapshot.data!.item2,);
               } else {
-                return const LogIn();
+                return GetHomePageSection(isLoggedIn: false);
               }
             } else {
               return AlertDialog(

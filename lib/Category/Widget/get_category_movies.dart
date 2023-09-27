@@ -1,12 +1,13 @@
-import 'package:egybest_app/Category/Api/categroy_api.dart';
-import 'package:egybest_app/Category/Screen/category_movies.dart';
-import 'package:egybest_app/Main%20calsses/category_page.dart';
+import 'package:Mova/Category/Api/categroy_api.dart';
+import 'package:Mova/Category/Screen/category_movies.dart';
+import 'package:Mova/Main%20calsses/category_page.dart';
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 
 class GetCategoryMovies extends StatelessWidget {
   int categoryId;
-  GetCategoryMovies({super.key,required this.categoryId});
+  bool isLoggedIn;
+  GetCategoryMovies({super.key,required this.categoryId,required this.isLoggedIn});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class GetCategoryMovies extends StatelessWidget {
             } else {
               if(snapshot.connectionState == ConnectionState.done){
                 if(snapshot.data!.item1 == true){
-                  return CategoryMovies(categoryPage: snapshot.data!.item2);
+                  return CategoryMovies(categoryPage: snapshot.data!.item2,isLoggedIn:isLoggedIn,);
                 } else {
                   return AlertDialog(
                     title: const Text("data"),

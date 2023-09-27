@@ -1,15 +1,17 @@
 import 'dart:convert';
 
-import 'package:egybest_app/HomePage/Widget/Movie_Item.dart';
-import 'package:egybest_app/Main%20calsses/mini_move.dart';
-import 'package:egybest_app/Main%20calsses/search_results.dart';
-import 'package:egybest_app/Search/Widget/get_search_result.dart';
+
+import 'package:Mova/HomePage/Widget/Movie_Item.dart';
+import 'package:Mova/Main%20calsses/mini_move.dart';
+import 'package:Mova/Main%20calsses/search_results.dart';
+import 'package:Mova/Search/Widget/get_search_result.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 class SearchPage extends StatefulWidget {
+  bool isLoggedIn;
   var searchResult;
-  SearchPage({super.key,this.searchResult});
+  SearchPage({super.key,this.searchResult,required this.isLoggedIn});
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -93,7 +95,7 @@ class _SearchPageState extends State<SearchPage> {
                 decoration: InputDecoration(
                   prefixIcon: IconButton(onPressed: (){
 
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>GetSearchResult(search: search)));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>GetSearchResult(isLoggedIn: widget.isLoggedIn,search: search)));
 
                   }, icon: const Icon(Icons.search)),
                   suffixIcon: IconButton(onPressed: (){
@@ -120,7 +122,7 @@ class _SearchPageState extends State<SearchPage> {
                 width: MediaQuery.of(context).size.width - 20,
                 child:  Padding(
                   padding: const EdgeInsets.only(top: 7,bottom: 7),
-                  child: MovieItem(movie: searchMovies[i]),
+                  child: MovieItem(isLoggedIn: widget.isLoggedIn,movie: searchMovies[i]),
                 ),
               )),
             ),

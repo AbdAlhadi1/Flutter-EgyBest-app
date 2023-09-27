@@ -1,9 +1,10 @@
 import 'dart:convert';
 
-import 'package:egybest_app/Server/server.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 import 'package:tuple/tuple.dart';
+
+import '../../Server/server.dart';
 
 class SignUpApi{
   // Sign Up function

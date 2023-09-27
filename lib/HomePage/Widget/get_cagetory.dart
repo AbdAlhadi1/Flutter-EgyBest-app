@@ -1,14 +1,17 @@
-import 'package:egybest_app/HomePage/Api/home_page_api.dart';
-import 'package:egybest_app/HomePage/Screen/home_page.dart';
-import 'package:egybest_app/Main%20calsses/category.dart';
-import 'package:egybest_app/Main%20calsses/home_page_sections.dart';
+
+import 'package:Mova/HomePage/Api/home_page_api.dart';
+import 'package:Mova/HomePage/Screen/home_page.dart';
+import 'package:Mova/Main%20calsses/category.dart';
+import 'package:Mova/Main%20calsses/home_page_sections.dart';
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 
 // ignore: must_be_immutable
 class GetHomePageCategory extends StatelessWidget {
+  bool isLoggedIn;
+  var user;
   List<HomePageSection> homePageSection;
-   GetHomePageCategory({super.key,required this.homePageSection});
+   GetHomePageCategory({super.key,required this.homePageSection,required this.isLoggedIn,this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +24,15 @@ class GetHomePageCategory extends StatelessWidget {
         } else {
           if(snapshot.connectionState == ConnectionState.done){
             if(snapshot.data!.item1 == true){
-              return HomePage(
+              return(isLoggedIn)? HomePage(
                 category: snapshot.data!.item2,
                 homePageSection: homePageSection,
+                isLoggedIn: isLoggedIn,
+                user: user,
+              ):HomePage(
+                category: snapshot.data!.item2,
+                homePageSection: homePageSection,
+                isLoggedIn: isLoggedIn,
               );
             } else {
               return AlertDialog(

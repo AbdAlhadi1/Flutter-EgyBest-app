@@ -1,5 +1,5 @@
 
-import 'package:egybest_app/Log%20In/Widget/check_if_user_logged_in.dart';
+import 'package:Mova/Log%20In/Widget/check_if_user_logged_in.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home:CheckIfUserLoggedIn(),
     );

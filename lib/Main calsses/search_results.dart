@@ -1,4 +1,5 @@
-import 'package:egybest_app/Main%20calsses/mini_move.dart';
+
+import 'package:Mova/Main%20calsses/mini_move.dart';
 
 class SearchResultObject{
   late String nextUrl,previousUrl;

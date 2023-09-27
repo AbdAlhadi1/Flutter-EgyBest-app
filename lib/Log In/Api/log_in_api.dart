@@ -1,7 +1,6 @@
 import 'dart:convert';
-
-import 'package:egybest_app/Main%20calsses/user.dart';
-import 'package:egybest_app/Server/server.dart';
+import 'package:Mova/Main%20calsses/user.dart';
+import 'package:Mova/Server/server.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';

@@ -1,17 +1,19 @@
-import 'package:egybest_app/Main%20calsses/mini_move.dart';
-import 'package:egybest_app/Movie%20Details/Widget/get_movie_details.dart';
+
+import 'package:Mova/Main%20calsses/mini_move.dart';
+import 'package:Mova/Movie%20Details/Widget/get_movie_details.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class MovieItem extends StatelessWidget {
+  bool isLoggedIn;
   MiniMove movie;
-  MovieItem({super.key,required this.movie});
+  MovieItem({super.key,required this.movie,required this.isLoggedIn});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
         onTap: (){
-          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> GetMovieDetails(movieId: movie.movieId)));
+          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> GetMovieDetails(isLoggedIn: isLoggedIn,movieId: movie.movieId)));
         },
         child: Column(
           mainAxisSize: MainAxisSize.min,

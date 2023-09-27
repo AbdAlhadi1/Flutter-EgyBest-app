@@ -1,5 +1,6 @@
-import 'package:egybest_app/Main%20calsses/category.dart';
-import 'package:egybest_app/Main%20calsses/mini_move.dart';
+
+import 'package:Mova/Main%20calsses/category.dart';
+import 'package:Mova/Main%20calsses/mini_move.dart';
 
 class CategoryPage{
   late Category category;

@@ -1,11 +1,14 @@
 import 'dart:convert';
-import 'package:egybest_app/HomePage/Widget/Drawer_component.dart';
-import 'package:egybest_app/HomePage/Widget/Most_view_section.dart';
-import 'package:egybest_app/Main%20calsses/category.dart';
-import 'package:egybest_app/Main%20calsses/home_page_sections.dart';
-import 'package:egybest_app/Main%20calsses/mini_move.dart';
-import 'package:egybest_app/Search/Screen/search_page.dart';
-import 'package:egybest_app/Server/server.dart';
+import 'package:Mova/HomePage/Widget/Drawer_component.dart';
+import 'package:Mova/HomePage/Widget/Most_view_section.dart';
+import 'package:Mova/HomePage/Widget/get_home_page_section.dart';
+import 'package:Mova/Log%20In/Screen/Log_In.dart';
+import 'package:Mova/Log%20Out/log_out.dart';
+import 'package:Mova/Main%20calsses/category.dart';
+import 'package:Mova/Main%20calsses/home_page_sections.dart';
+import 'package:Mova/Main%20calsses/mini_move.dart';
+import 'package:Mova/Search/Screen/search_page.dart';
+import 'package:Mova/Server/server.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -13,9 +16,11 @@ import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatefulWidget {
+  var user;
+  bool isLoggedIn;
   List<Category> category;
   List<HomePageSection> homePageSection;
-  HomePage({super.key,required this.homePageSection,required this.category});
+  HomePage({super.key,required this.homePageSection,required this.category,required this.isLoggedIn,this.user});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -88,25 +93,23 @@ class _HomePageState extends State<HomePage> {
             ),
 
             backgroundColor: Colors.white,
-            title: Row(
-              children: [
-                RichText(text:const TextSpan(text: "Best",style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color:Colors.indigo
-                ))),
-                RichText(text:const TextSpan(text: "Egy",style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.red
-                )))
-              ],
+            title: SizedBox(
+              width: 100,
+              height: 60,
+              child: InkWell(
+                onTap: (){
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>GetHomePageSection(isLoggedIn: widget.isLoggedIn)));
+                },
+                child: const Image(
+                  image: AssetImage("images/logo2.png"),
+                ),
+              ),
             ),
 
             actions: [
               IconButton(
                 onPressed: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> SearchPage()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> SearchPage(isLoggedIn: widget.isLoggedIn,)));
                 },
                 icon: const Icon(Icons.search,size: 35,),
               ),
@@ -115,21 +118,40 @@ class _HomePageState extends State<HomePage> {
                 child: SizedBox(
                   height:10 ,
                   width: 115,
-                  child: CupertinoButton(
+                  child: (widget.isLoggedIn)?CupertinoButton(
+                      color: Colors.indigo,
+                      padding: EdgeInsets.zero,
+                      onPressed: (){
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>LogOut(user: widget.user,)));
+                      },
+                      child: Row(
+                        children: [
+                          const SizedBox(width:6),
+                          const Icon(Icons.logout,size: 20,),
+                          const SizedBox(width:6),
+                          RichText(text: const TextSpan(
+                              text: "تسجيل خروج",
+                              style: TextStyle(
+                                  fontSize: 14
+                              )
+                          )),
+                        ],
+                      )
+                  ):CupertinoButton(
                     color: Colors.green,
                     padding: EdgeInsets.zero,
                     onPressed: (){
-
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const LogIn()));
                     },
                     child: Row(
                       children: [
                         const SizedBox(width:4),
-                        const Icon(Icons.person),
-                        const SizedBox(width:4),
+                        const Icon(Icons.person,size: 20,),
+                        const SizedBox(width:6),
                         RichText(text: const TextSpan(
                             text: "اشترك مجانا",
                             style: TextStyle(
-                                fontSize: 17
+                                fontSize: 14
                             )
                         )),
                       ],
@@ -148,34 +170,43 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 10,right: 7),
-                      child: DrawerComponent(category: widget.category[i]),
+                      child: DrawerComponent(isLoggedIn: widget.isLoggedIn,category: widget.category[i]),
                     ),
                     Divider(color: Colors.black.withOpacity(0.5),),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10,right: 7),
-                  child:InkWell(
-                    onTap: (){
-                      setState(() {
-                        isRed = !isRed;
-                      });
-                    },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        const Image(image: AssetImage("images/logout.png"),width: 35,height: 35,),
-                        const SizedBox(width: 7,),
-                        RichText(text: TextSpan(text: "تسجيل خروج",style: TextStyle(
-                            color:  (isRed == true)?Colors.red:Colors.indigo,
-                            fontSize: 18
-                        ))),
+                Visibility(
+                  visible: (widget.isLoggedIn)?true:false,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 10,right: 7),
+                    child:InkWell(
+                      onTap: (){
+                        setState(() {
+                          isRed = !isRed;
+                        });
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>LogOut(user: widget.user,)));
+                        setState(() {
+                          isRed = !isRed;
+                        });
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          const Image(image: AssetImage("images/logout.png"),width: 35,height: 35,),
+                          const SizedBox(width: 7,),
+                          RichText(text: TextSpan(text: "تسجيل خروج",style: TextStyle(
+                              color:  (isRed == true)?Colors.red:Colors.indigo,
+                              fontSize: 18
+                          ))),
 
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
-                Divider(color: Colors.black.withOpacity(0.5),),
+                Visibility(
+                    visible:(widget.isLoggedIn)?true:false,
+                    child: Divider(color: Colors.black.withOpacity(0.5),)),
 
               ],
             ),
@@ -190,7 +221,7 @@ class _HomePageState extends State<HomePage> {
                       // the most view move section
                       for(int i=0;i<widget.homePageSection.length; i++)Padding(
                         padding: const EdgeInsets.only(top: 15,bottom: 20),
-                        child: HomePageSections(title: widget.homePageSection[i].category.name, moviesList: widget.homePageSection[i].categoryMovies,categoryId: widget.homePageSection[i].category.id),
+                        child: HomePageSections(isLoggedIn: widget.isLoggedIn,title: widget.homePageSection[i].category.name, moviesList: widget.homePageSection[i].categoryMovies,categoryId: widget.homePageSection[i].category.id),
                       ),
                     ],
                   ),

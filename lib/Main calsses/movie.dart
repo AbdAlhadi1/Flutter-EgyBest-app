@@ -1,8 +1,11 @@
-import 'package:egybest_app/Main%20calsses/category.dart';
-import 'package:egybest_app/Main%20calsses/mini_move.dart';
-import 'package:egybest_app/Main%20calsses/movie_hero.dart';
-import 'package:egybest_app/Main%20calsses/quality.dart';
-import 'package:egybest_app/Main%20calsses/translation.dart';
+
+
+import 'package:Mova/Main%20calsses/mini_move.dart';
+import 'package:Mova/Main%20calsses/movie_hero.dart';
+import 'package:Mova/Main%20calsses/quality.dart';
+import 'package:Mova/Main%20calsses/translation.dart';
+
+import 'category.dart';
 
 class Movie{
   late MiniMove moveInfo;

@@ -1,7 +1,7 @@
-import 'package:egybest_app/HomePage/Screen/home_page.dart';
-import 'package:egybest_app/Log%20In/Screen/Log_In.dart';
-import 'package:egybest_app/SIgn%20Up/Widget/send_signup_data.dart';
-import 'package:egybest_app/my_field.dart';
+
+import 'package:Mova/Log%20In/Screen/Log_In.dart';
+import 'package:Mova/SIgn%20Up/Widget/send_signup_data.dart';
+import 'package:Mova/my_field.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +19,9 @@ class _SignUpState extends State<SignUp> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  bool _isPasswordVisible = true;
+  bool _isPasswordVisible1 = true;
+
   bool checkForm (){
     var op = formKey.currentState;
     return op!.validate();
@@ -33,13 +36,21 @@ class _SignUpState extends State<SignUp> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(height: MediaQuery.of(context).size.height/5,),
+                //SizedBox(height: MediaQuery.of(context).size.height/5,),
+                const Padding(
+                    padding: EdgeInsets.only(top: 20,right: 50, left: 50),
+                    child: Image(
+                      image: AssetImage("images/logo2.png"),
+                    )
+                ),
+                const SizedBox(height: 20,),
                 Form(
                   key: formKey,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       MyFild(
+                        suffixIcon: const Icon(Icons.person),
                         contorller: usernameController,
                         errorText: "",
                         hintText: "اسم المستخدم",
@@ -59,6 +70,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                       const SizedBox(height: 3,),
                       MyFild(
+                          suffixIcon: const Icon(Icons.email),
                           contorller: emailController,
                           errorText: "",
                           hintText: "البريد الالكتروني",
@@ -82,14 +94,24 @@ class _SignUpState extends State<SignUp> {
                       ),
                       const SizedBox(height: 3,),
                       MyFild(
+                        suffixIcon: IconButton(
+                            icon: Icon(_isPasswordVisible
+                                ? Icons.visibility_off
+                                : Icons.visibility),
+                            onPressed: () {
+                              setState(() {
+                                _isPasswordVisible = !_isPasswordVisible;
+                              });
+                            }),
                           contorller: passwordController,
                           errorText: "",
                           hintText: "كلمة المرور",
-                          obscure: false,
+                          obscure: _isPasswordVisible,
                           readOnly: false,
                           rightPadding: 20.0,
                           leftPadding: 20.0,
                           color: Colors.white,
+                          maxLine: 1,
                           sidesColor: Colors.black45,
                           val: (_){
                             if(passwordController.text.isEmpty){
@@ -105,14 +127,24 @@ class _SignUpState extends State<SignUp> {
                       ),
                       const SizedBox(height: 3,),
                       MyFild(
+                        suffixIcon: IconButton(
+                            icon: Icon(_isPasswordVisible
+                                ? Icons.visibility_off
+                                : Icons.visibility),
+                            onPressed: () {
+                              setState(() {
+                                _isPasswordVisible1 = !_isPasswordVisible1;
+                              });
+                            }),
                           contorller: confirmPasswordController,
                           errorText: "",
                           hintText: "تاكيد كلمة المرور",
-                          obscure: false,
+                          obscure: _isPasswordVisible1,
                           readOnly: false,
                           rightPadding: 20.0,
                           leftPadding: 20.0,
                           color: Colors.white,
+                          maxLine: 1,
                           sidesColor: Colors.black45,
                           val: (_){
                             if(confirmPasswordController.text.isEmpty){
@@ -145,9 +177,13 @@ class _SignUpState extends State<SignUp> {
                       fontSize: 17
                   ),)
                 ),
-                  SizedBox(height: (3*(MediaQuery.of(context).padding.top +
+                  /*SizedBox(height: (3*(MediaQuery.of(context).padding.top +
                      MediaQuery.of(context).padding.bottom +
-                     AppBar().preferredSize.height))-10,),
+                     AppBar().preferredSize.height)),),*/
+                const SizedBox(
+                    height: 230,
+                    width: 250,
+                    child: Image(image: AssetImage("images/login.png"))),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

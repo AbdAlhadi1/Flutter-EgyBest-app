@@ -1,4 +1,4 @@
-import 'package:egybest_app/Main%20calsses/movie.dart';
+import 'package:Mova/Main%20calsses/movie.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

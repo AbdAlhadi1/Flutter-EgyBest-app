@@ -1,15 +1,17 @@
 // ignore: file_names
-import 'package:egybest_app/Category/Widget/get_category_movies.dart';
-import 'package:egybest_app/HomePage/Widget/Movie_Item.dart';
-import 'package:egybest_app/Main%20calsses/mini_move.dart';
+
+import 'package:Mova/Category/Widget/get_category_movies.dart';
+import 'package:Mova/HomePage/Widget/Movie_Item.dart';
+import 'package:Mova/Main%20calsses/mini_move.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class HomePageSections extends StatelessWidget {
+  bool isLoggedIn;
   int categoryId;
   String title;
   List <MiniMove> moviesList;
-  HomePageSections({super.key,required this.title,required this.moviesList,required this.categoryId});
+  HomePageSections({super.key,required this.title,required this.moviesList,required this.categoryId,required this.isLoggedIn});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,7 @@ class HomePageSections extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 15),
                   child: InkWell(
                     onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>GetCategoryMovies(categoryId: categoryId)));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>GetCategoryMovies(isLoggedIn: isLoggedIn,categoryId: categoryId)));
                     },
                     child: RichText(
                       text: const TextSpan(text: "المزيد", style: TextStyle(
@@ -53,7 +55,7 @@ class HomePageSections extends StatelessWidget {
                 children: [
                     for(int i=0;i<moviesList.length;i++)Padding(
                       padding: const EdgeInsets.only(left: 5,right: 5),
-                       child: Center(child: MovieItem(movie: moviesList[i],)),
+                       child: Center(child: MovieItem(isLoggedIn: isLoggedIn,movie: moviesList[i],)),
                      ),
                   ],
                 ),

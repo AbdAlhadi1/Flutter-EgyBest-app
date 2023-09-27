@@ -1,16 +1,18 @@
-import 'package:egybest_app/HomePage/Widget/Most_view_section.dart';
-import 'package:egybest_app/Main%20calsses/movie.dart';
-import 'package:egybest_app/Movie%20Details/Widget/details_table_for_movie_details.dart';
-import 'package:egybest_app/Movie%20Details/Widget/movie_heroes.dart';
-import 'package:egybest_app/Movie%20Details/Widget/movie_sotry_for_movie_details.dart';
-import 'package:egybest_app/Movie%20Details/Widget/photo_and_downloade_button_for_movie_details.dart';
-import 'package:egybest_app/Movie%20Details/Widget/trailer_for_the_movie_details.dart';
+
+import 'package:Mova/HomePage/Widget/Most_view_section.dart';
+import 'package:Mova/Main%20calsses/movie.dart';
+import 'package:Mova/Movie%20Details/Widget/details_table_for_movie_details.dart';
+import 'package:Mova/Movie%20Details/Widget/movie_heroes.dart';
+import 'package:Mova/Movie%20Details/Widget/movie_sotry_for_movie_details.dart';
+import 'package:Mova/Movie%20Details/Widget/photo_and_downloade_button_for_movie_details.dart';
+import 'package:Mova/Movie%20Details/Widget/trailer_for_the_movie_details.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class MovieDetails extends StatefulWidget {
+  bool isLoggedIn;
   Movie? movie;
-  MovieDetails({super.key,required this.movie});
+  MovieDetails({super.key,required this.movie,required this.isLoggedIn});
 
   @override
   State<MovieDetails> createState() => _MovieDetailsState();
@@ -40,7 +42,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                 const SizedBox(height: 20,),
                 Visibility(
                     visible: widget.movie!.relatedMovies.isEmpty? false:true,
-                    child: HomePageSections(title: "افلام ذات صلة", moviesList:widget.movie!.relatedMovies,categoryId: widget.movie!.category[0].id,)),
+                    child: HomePageSections(isLoggedIn:widget.isLoggedIn ,title: "افلام ذات صلة", moviesList:widget.movie!.relatedMovies,categoryId: widget.movie!.category[0].id,)),
                 const SizedBox(height: 50,)
               ],
             ),

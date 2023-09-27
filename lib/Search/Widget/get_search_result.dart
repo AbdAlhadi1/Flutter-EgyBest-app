@@ -1,13 +1,14 @@
-import 'package:egybest_app/Main%20calsses/search_results.dart';
-import 'package:egybest_app/Search/Api/search_page_Api.dart';
-import 'package:egybest_app/Search/Screen/search_page.dart';
+import 'package:Mova/Main%20calsses/search_results.dart';
+import 'package:Mova/Search/Api/search_page_Api.dart';
+import 'package:Mova/Search/Screen/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 
 // ignore: must_be_immutable
 class GetSearchResult extends StatelessWidget {
+  bool isLoggedIn;
   TextEditingController search;
-  GetSearchResult({super.key,required this.search});
+  GetSearchResult({super.key,required this.search,required this.isLoggedIn});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class GetSearchResult extends StatelessWidget {
           } else {
             if(snapshot.connectionState == ConnectionState.done){
               if(snapshot.data!.item1 == true){
-                return  SearchPage(searchResult: snapshot.data!.item2,);
+                return  SearchPage(isLoggedIn: isLoggedIn,searchResult: snapshot.data!.item2,);
               } else {
                 return AlertDialog(
                   title: const Text(""),
